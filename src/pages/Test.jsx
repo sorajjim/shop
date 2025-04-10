@@ -1,21 +1,22 @@
-import { useState, useTransition } from "react"
-    const a = new Array(1000).fill(0)
+import { useEffect, useState } from "react"
+    
 function Test() {
-    const [name, setName] = useState('')
-    const [isPending, startTransition] = useTransition()
+    let [count, setCount] = useState(0);
+    let [age, setAge] = useState(20);
+    useEffect(()=>{
+        if(count != 0 && count < 3) {
+            setAge(age+1)
+            console.log("age: ", age)
+        }
+    },[count])
     return (
         <div>
-            <input onChange={(e)=>{
-                    startTransition(()=>{
-                        setName(e.target.value)
-                    })
-                }}/>
-            {
-                isPending ? '로딩중':
-                a.map(()=>{
-                    return <div>{name}</div>
-                })
-            }
+        <div>안녕하십니까 전 {age}</div>
+        <button onClick={()=> {
+            setCount(count+1)
+            console.log("count: ", count)
+        
+        }}>누르면한살먹기</button>
         </div>
     )
 }

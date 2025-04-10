@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {Nav} from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../stores/cartSlice";
+import { useLike } from "../hooks/useLike";
+import { useUsername } from "../hooks/useUsername";
+import { useAddShoes } from "../hooks/useAddShoes";
 
 
 function Detail(props){
   let [alert, setAlert] = useState(true)
   let [tab, setTab] = useState(0)
-  
+  const shoes = useSelector((state)=> state.shoes.data)
   useEffect(()=> {
       let a = setTimeout(()=> {
         setAlert(false)
@@ -26,7 +29,7 @@ function Detail(props){
   // let 찾은상품 = props.shoes.find(function(x){
   //   return x.id == id
   // });
-  let findGoodsId = props.shoes.find((x) => x.id == id )
+  let findGoodsId = shoes.find((x) => x.id == id )
   // console.log(findGoodsId);
   let urlId = findGoodsId != null ? parseInt(findGoodsId.id)+1 : null;
   useEffect(()=>{
@@ -79,6 +82,8 @@ function Detail(props){
 }
 function DetailComponent(props){
   const dispatch = useDispatch()
+  let [like, addLike] = useLike()
+
   return (
     <div className="container">
     <div className="row">
@@ -86,6 +91,7 @@ function DetailComponent(props){
         <img src={"https://codingapple1.github.io/shop/shoes"+ props.urlId +".jpg"} width="100%" />
         </div>
         <div className="col-md-6">
+        {like}<button onClick={()=>{ addLike() }}>❤</button>
         <h4 className="pt-5">{props.findGoodsId.title}</h4>
         <p>{props.findGoodsId.content}</p>
         <p>{props.findGoodsId.price}원</p>
@@ -119,6 +125,7 @@ function TabContent(props){
   
   const [fade, setFade] = useState('');
   const content = ["내용0", "내용1", "내용2"];
+
   useEffect(()=>{
     const a = setTimeout(()=>{
       setFade('end')
