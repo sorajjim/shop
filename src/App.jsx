@@ -7,6 +7,7 @@ import { Routes, Route, useNavigate} from 'react-router-dom';
 
 import MainPage from './pages/MainPage';
 import { useUsername } from './hooks/useUsername';
+import ActionAreaCard from './pages/Study';
 
 
 const Detail = lazy(()=>import('./pages/Detail')) 
@@ -32,6 +33,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate("/")}} >Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/study')}}>Study</Nav.Link>
           </Nav>
           <Nav className="ms-auto">반가워요 {result.data?.name}</Nav>
         </Navbar.Collapse>
@@ -43,6 +45,7 @@ function App() {
         <Route path='/detail/:id' element={<Detail/>} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/test' element={<Test />} />
+        <Route path='/study' element={<ActionAreaCard />} />
         <Route path='*' element={<div>없는페이지에요</div>}/>
       </Routes>
     </Suspense>
