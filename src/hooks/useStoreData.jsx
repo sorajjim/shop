@@ -7,7 +7,7 @@ export function useStoreData (){
         queryFn: ()=>
             axios.get('/store.json')
             .then((result) => {
-                console.log('result ', result.data)
+                // console.log('result ', result.data)
                 return result.data
             })
     });
