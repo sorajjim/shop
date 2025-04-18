@@ -1,1 +1,0 @@
-import{r as s,j as o}from"./index-CjO1BGzH.js";function l(){let[e,n]=s.useState(0),[t,r]=s.useState(20);return s.useEffect(()=>{e!=0&&e<3&&(r(t+1),console.log("age: ",t))},[e]),o.jsxs("div",{children:[o.jsxs("div",{children:["안녕하십니까 전 ",t]}),o.jsx("button",{onClick:()=>{n(e+1),console.log("count: ",e)},children:"누르면한살먹기"})]})}export{l as default};
