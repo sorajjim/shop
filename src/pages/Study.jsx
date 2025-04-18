@@ -4,20 +4,30 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useStoreData } from '../hooks/useStoreData';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCartItem } from '../stores/studyCartSlice';
 
 export default function ActionAreaCard() {
     const storeData = useStoreData()
+    const carts = useSelector((state) => state.studyCart)
+    const dispatch = useDispatch()
   return (
     <>
-    <div className='container' style={{ marginTop: 15, marginBottom: 15, display: 'flex', justifyContent: 'space-evenly' }} onDragOver={(e)=>{dragEnter(e)}}>
+    <div className='container' style={{ marginTop: 15, marginBottom: 15, display: 'flex', justifyContent: 'space-evenly' }} onDragOver={dragEnter}>
         {
             storeData.data?.products?.map((product, index) => {
                 return (
-                    <Card id={'product'+index} key={index} sx={{ width: 250}} draggable={true} onDragStart={(e)=>drag(e)}>
+                    <Card 
+                    id={'product'+index} 
+                    key={index} 
+                    sx={{ width: 250}} 
+                    draggable={true} 
+                    onDragStart={drag}
+                    >
                         <CardMedia
                         component="img"
                         height="140"
-                        image={"./src/images/" + product.photo}
+                        image={"/shop/public/images/" + product.photo}
                         alt="green iguana"
                         draggable="false"
                         />
@@ -41,7 +51,7 @@ export default function ActionAreaCard() {
     {/* <h4>장바구니</h4> */}
     <div className='container' style={{backgroundColor: '#aaa7a7', height:300, padding:15}}>
     
-        <div style={{height: 260, display: 'flex', justifyContent: 'space-evenly'}} onDrop={(e)=>{drop(e)}} onDragOver={(e)=>{dragEnter(e)}}>
+        <div id='dropZone' style={{height: 260, display: 'flex', justifyContent: 'space-evenly'}} onDrop={drop} onDragOver={dragEnter}>
 
         </div>
     </div>
@@ -67,8 +77,22 @@ function drop(ev) {
     console.log("drop")
     let data = ev.dataTransfer.getData("text");
     console.log("drop data:: ", data)
-    const draggedElement = document.getElementById(data);
-    const clone = draggedElement.cloneNode(true); 
-    clone.id = data + "_copy_" + Date.now(); // ID 중복 방지
-    ev.target.appendChild(clone);
+    const productId = data.replace("product","")
+    if(carts.find((a) => a.id == productId)) {
+        
+    }
+    dispatch(setCartItem({id : productId, quantity : 1}))
+    // const draggedElement = document.getElementById(data);
+    // const clone = draggedElement.cloneNode(true); 
+    // clone.id = data + "_copy"; // ID 중복 방지
+    // clone.className += " cloneData"
+    // // 카드 너비 유지
+    // clone.style.width = "250px";
+    // const cloneData = document.getElementsByClassName("cloneData")
+    // console.log("cloneData:: ", cloneData)
+    // // 항상 지정된 drop 영역에만 추가
+    // const dropZone = document.getElementById("dropZone");
+    // if (dropZone) {
+    //     dropZone.appendChild(clone);
+    // }
 }

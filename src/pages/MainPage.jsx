@@ -18,7 +18,7 @@ function MainPage() {
               const imgUrl = "https://codingapple1.github.io/shop/shoes" + shoeId + ".jpg";
               return (
                 <div className='col-md-4' key={a.id} onClick={()=>{
-                    navigate('/detail/' + a.id)
+                    navigate('/shop/detail/' + a.id)
                 }}>
                   <img src={imgUrl} width="80%" />
                   <h4>{a.title}</h4>

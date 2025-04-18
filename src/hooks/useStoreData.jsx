@@ -5,7 +5,7 @@ export function useStoreData (){
     const result = useQuery({
         queryKey: ['storeData'],
         queryFn: ()=>
-            axios.get('/store.json')
+            axios.get('/shop/store.json')
             .then((result) => {
                 // console.log('result ', result.data)
                 return result.data

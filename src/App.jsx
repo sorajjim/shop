@@ -27,13 +27,13 @@ function App() {
       </div>
       <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand onClick={()=>{navigate("/")}}>ShoeShop</Navbar.Brand>
+        <Navbar.Brand onClick={()=>{navigate("/shop")}}>ShoeShop</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link onClick={()=>{navigate("/")}} >Home</Nav.Link>
-            <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
-            <Nav.Link onClick={()=>{navigate('/study')}}>Study</Nav.Link>
+            <Nav.Link onClick={()=>{navigate("/shop")}} >Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/shop/cart')}}>Cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/shop/study')}}>Study</Nav.Link>
           </Nav>
           <Nav className="ms-auto">반가워요 {result.data?.name}</Nav>
         </Navbar.Collapse>
@@ -41,12 +41,12 @@ function App() {
     </Navbar>
     <Suspense fallback={<div>로딩중...</div>}>
       <Routes>
-        <Route path='/' element={<MainPage />}/>
-        <Route path='/detail/:id' element={<Detail/>} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/test' element={<Test />} />
-        <Route path='/study' element={<ActionAreaCard />} />
-        <Route path='*' element={<div>없는페이지에요</div>}/>
+        <Route path='/shop' element={<MainPage />}/>
+        <Route path='/shop/detail/:id' element={<Detail/>} />
+        <Route path='/shop/cart' element={<Cart />} />
+        <Route path='/shop/test' element={<Test />} />
+        <Route path='/shop/study' element={<ActionAreaCard />} />
+        <Route path='/shop/*' element={<div>없는페이지에요</div>}/>
       </Routes>
     </Suspense>
       </div>
