@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const studyCart = createSlice({
-    name : 'studyCart',
-    initialState : {
+    name: 'studyCart',
+    initialState: {
         cartItem: []
     },
-    reducer : {
-        setCartItem(state, action){
-            state.cartItem = [...state.data, ...action.payload]
+    reducers: {
+        setCartItem(state, action) {
+            const exists = state.cartItem.find(item => item.id === action.payload.id);
+            if (!exists) {
+                state.cartItem.push(action.payload);
+            }
         },
         increaseQuantity(state, action) {
-            
+            const item = state.cartItem.find(item => item.id === action.payload.id);
+            if (item) {
+                item.quantity += 1;
+            }
         }
     }
-})
+});
 
-export const {setCartItem} = studyCart.actions
+export const { setCartItem, increaseQuantity } = studyCart.actions;
