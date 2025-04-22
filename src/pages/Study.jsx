@@ -70,7 +70,7 @@ export default function ActionAreaCard() {
                             <CardMedia
                             component="img"
                             height="140"
-                            image={"/shop/public/images/" + item.photo}
+                            image={"/shop/images/" + item.photo}
                             alt={item.title}
                             draggable="false"
                             />  
